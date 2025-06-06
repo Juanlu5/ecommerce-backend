@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql_ecommerce
+    environment:
+      MYSQL_DATABASE: ecommerce
+      MYSQL_USER: ecommerce_user
+      MYSQL_PASSWORD: 1020304050
+      MYSQL_ROOT_PASSWORD: rootpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - ecommerce-net
+
+  app:
+    build: .
+    container_name: ecommerce_app
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/ecommerce?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: ecommerce_user
+      SPRING_DATASOURCE_PASSWORD: 1020304050
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - "8080:8080"
+    networks:
+      - ecommerce-net
+
+volumes:
+  mysql_data:
+
+networks:
+  ecommerce-net:

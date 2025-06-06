@@ -1,0 +1,28 @@
+HELP.md
+# Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+**/logs/
+**/*.log
+
+# IDEs
+*.iml
+*.ipr
+*.iws
+.idea/
+*.class
+*.swp
+*~
+*.sublime-workspace
+*.sublime-project
+.vscode/
+nbproject/private/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.pid
+.env
+docker-compose.override.yml
